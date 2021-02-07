@@ -11,7 +11,7 @@ import time
 # NeoPixel LED Configuration
 LED_COUNT			= 50				# Number of LED pixels.
 LED_PIN				= board.D18			# GPIO pin connected to the pixels (18 is PCM).
-LED_BRIGHTNESS			= 0.5				# Float from 0.0 (min) to 1.0 (max)
+LED_BRIGHTNESS			= 0.03				# Float from 0.0 (min) to 1.0 (max)
 LED_ORDER			= neopixel.GRB			# Strip type and colour ordering
 
 COLOR_VFR		= (255,0,0)			# Green
@@ -26,10 +26,10 @@ COLOR_CLEAR		= (0,0,0)			# Clear
 COLOR_LIGHTNING		= (255,255,255)			# White
 
 # Do you want the METARMap to be static to just show flight conditions, or do you also want blinking/fading based on current wind conditions
-ACTIVATE_WINDCONDITION_ANIMATION = False		# Set this to False for Static or True for animated wind conditions
+ACTIVATE_WINDCONDITION_ANIMATION = True		# Set this to False for Static or True for animated wind conditions
 
 #Do you want the Map to Flash white for lightning in the area
-ACTIVATE_LIGHTNING_ANIMATION = False			# Set this to False for Static or True for animated Lightning
+ACTIVATE_LIGHTNING_ANIMATION = True			# Set this to False for Static or True for animated Lightning
 
 # Fade instead of blink
 FADE_INSTEAD_OF_BLINK	= True				# Set to False if you want blinking
@@ -49,7 +49,7 @@ BLINK_TOTALTIME_SECONDS	= 300
 pixels = neopixel.NeoPixel(LED_PIN, LED_COUNT, brightness = LED_BRIGHTNESS, pixel_order = LED_ORDER, auto_write = False)
 
 # Read the airports file to retrieve list of airports and use as order for LEDs
-with open("/home/pi/airports") as f:
+with open("/home/pi/metar/METARMap/airports") as f:
 	airports = f.readlines()
 airports = [x.strip() for x in airports]
 
