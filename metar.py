@@ -56,7 +56,7 @@ airports = [x.strip() for x in airports]
 # Retrieve METAR from aviationweather.gov data server
 # Details about parameters can be found here: https://www.aviationweather.gov/dataserver/example?datatype=metar
 url = "https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=5&mostRecentForEachStation=true&stationString=" + ",".join([item for item in airports if item != "NULL"])
-print(url)
+#print(url)
 
 req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 Edg/86.0.622.69'})
 content = urllib.request.urlopen(req).read()
@@ -83,6 +83,8 @@ for metar in root.iter('METAR'):
 	print(stationId + ":" + flightCategory + ":" + str(windSpeed) + ":" + str(windGust) + ":" + str(lightning))
 	conditionDict[stationId] = { "flightCategory" : flightCategory, "windSpeed" : windSpeed, "windGust": windGust, "lightning": lightning }
 
+print("Updating METAR conditions...")
+        
 # Setting LED colors based on weather conditions
 looplimit = int(round(BLINK_TOTALTIME_SECONDS / BLINK_SPEED)) if (ACTIVATE_WINDCONDITION_ANIMATION or ACTIVATE_LIGHTNING_ANIMATION) else 1
 windCycle = False
@@ -113,7 +115,7 @@ while looplimit > 0:
 			else:
 				color = COLOR_CLEAR
 
-		print("Setting LED " + str(i) + " for " + airportcode + " to " + ("lightning " if lightningConditions else "") + ("windy " if windy else "") + (conditions["flightCategory"] if conditions != None else "None") + " " + str(color))
+		#print("Setting LED " + str(i) + " for " + airportcode + " to " + ("lightning " if lightningConditions else "") + ("windy " if windy else "") + (conditions["flightCategory"] if conditions != None else "None") + " " + str(color))
 		pixels[i] = color
 		i += 1
 
